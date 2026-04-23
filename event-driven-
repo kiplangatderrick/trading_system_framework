@@ -1,0 +1,37 @@
+from enum import Enum
+
+class EventType(Enum):
+    MARKET = 1
+    SIGNAL = 2
+    ORDER = 3
+    FILL = 4
+
+class Event:
+    def __init__(self, type):
+        self.type = type
+
+class MarketEvent(Event):
+    def __init__(self, data):
+        super().__init__(EventType.MARKET)
+        self.data = data
+
+class SignalEvent(Event):
+    def __init__(self, symbol, signal_type):
+        super().__init__(EventType.SIGNAL)
+        self.symbol = symbol
+        self.signal_type = signal_type
+
+class OrderEvent(Event):
+    def __init__(self, symbol, quantity, direction):
+        super().__init__(EventType.ORDER)
+        self.symbol = symbol
+        self.quantity = quantity
+        self.direction = direction
+
+class FillEvent(Event):
+    def __init__(self, symbol, quantity, price, commission):
+        super().__init__(EventType.FILL)
+        self.symbol = symbol
+        self.quantity = quantity
+        self.price = price
+        self.commission = commission
